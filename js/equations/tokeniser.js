@@ -156,3 +156,11 @@ function TokenizeInput(inputEquation) {
 
 	return tokenArray;
 }
+
+
+function TokenizeEquation(inputEquation) {
+	let tokenizedInput = TokenizeInput(inputEquation);
+
+	validateTokenizedInput(tokenizedInput);
+
+}
