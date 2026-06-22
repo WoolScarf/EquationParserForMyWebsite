@@ -164,3 +164,7 @@ function TokenizeEquation(inputEquation) {
 	validateTokenizedInput(tokenizedInput);
 
 }
+
+function validateTokenizedInput(tokenizedInput) {
+	return true;
+}
