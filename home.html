@@ -1,7 +1,14 @@
-<script src="js/equations/tokeniser.js"></script>
-<script>
-	let x = "sin{(x^2 + atan(15,2)}";
-	console.log(x);
-  console.log(TokenizeEquation(x));
-  debugger;
-</script>
+<body>
+	<script src="js/equations/const_collections.js"></script>
+	<script src="js/equations/equation_manager.js"></script>
+	<script src="js/equations/solver.js"></script>
+	<script src="js/equations/parser.js"></script>
+	<script src="js/equations/tokeniser.js"></script>
+	<script>
+		let x = "sin{x^2 + atan(15,2)}";
+		console.log(x);
+	  TokeniseEquation(x);
+	  debugger;
+	</script>
+
+</body>

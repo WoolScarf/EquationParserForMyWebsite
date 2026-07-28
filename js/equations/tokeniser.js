@@ -1,60 +1,22 @@
-//let inputEquation = "3x^2 + 2x - 5 = 0";
-
 class Token {
 	constructor(type, value) {
 		this.type = type;
 		this.value = value;
 	}
 
-	/*
-	constructor(type, typeLiteral, value) {
-		this.type = type;
-		this.typeLiteral = typeLiteral;
-		this.value = value;
-	}
-	*/
 }
-
-const TokenType = Object.freeze({
-	// Math Syntax
-	PLUS: '+',
-	MINUS: '-',
-	STAR: '*',
-	SLASH: '/',
-	CARET: '^',
-	EQUALS: '=',
-	LPAREN: '(',
-	RPAREN: ')',
-	LBRACKET: '[',
-	RBRACKET: ']',
-	LBRACE: '{',
-	RBRACE: '}',
-	COMMA: ',',
-	SPACE: " ",
-
-	// Literals
-	DIGIT: 'DIGIT',
-	LETTER: 'LETTER',
-
-
-	NUMBER: 'NUMBER',
-	STRING: 'STRING',
-
-
-	NONE: 'NONE'
-})
-
 
 function TokenAssigner(input) {
 	// State: Looking for token against TokenType
-  	const tokenKey =  Object.keys(TokenType).find(key => TokenType[key] === input);
+  	const tokenKey =  Object.keys(ValidTokens).find(key => ValidTokens[key] === input);
+	const tokenValue = ValidTokens[tokenKey];
 
 	if (input.length > 1) {
 		if (isLetter(input.at(-1))) {
-			return new Token("STRING", input);
+			return new Token(ValidTokens.STRING, input);
 		}
 		if (isDigit(input.at(-1))) {
-			return new Token("NUMBER", input);
+			return new Token(ValidTokens.NUMBER, input);
 		}
 	}
 	
@@ -67,7 +29,7 @@ function TokenAssigner(input) {
 	if (input.charCodeAt(0) >= 48 && input.charCodeAt(0) <= 57) {
 	// At this point: the character is a digit
 	// State: found token - digit
-		return new Token("DIGIT", input);
+		return new Token(ValidTokens.DIGIT, input);
 	}
 
 	if (
@@ -75,10 +37,10 @@ function TokenAssigner(input) {
 		input.charCodeAt(0) >= 97 && input.charCodeAt(0) <= 122) {
 	// At this point: the character is a letter
 	// State: found token - letter
-		return new Token("LETTER", input);
+		return new Token(ValidTokens.LETTER, input);
 	}
 
-	return new Token("NONE", input);
+	return new Token(ValidTokens.NONE, input);
 }
 
 function isDigit (char) {
@@ -98,41 +60,40 @@ function isLetter (char) {
 	}
 }
 
-
 function lastCharOfString(string) {
 		return string.at(-1);
 }
 
 
-function TokenizeInput(inputEquation) {
+function TokeniseInput(inputEquation) {
 	let tokenArray = [];
 	let lastType = "";
 	let currentStringOrNumber = "";
-
 	for (let i = 0; i < inputEquation.length; i++) {
 		// enter loop, get tokenized character
+
 		let currentToken = TokenAssigner(inputEquation[i]);
 
 		switch (currentToken.type) {
 
-			case TokenType.DIGIT:
+			case ValidTokens.DIGIT:
 				if (currentToken.type != lastType) {
 					if (currentStringOrNumber != "") {
 						tokenArray.push(TokenAssigner(currentStringOrNumber));
 					}
-					lastType = TokenType.DIGIT;
+					lastType = ValidTokens.DIGIT;
 					currentStringOrNumber = currentToken.value;
 				} else {
 					currentStringOrNumber += currentToken.value;
 				}
 			break;
 
-			case TokenType.LETTER:
+			case ValidTokens.LETTER:
 				if (currentToken.type != lastType) {
 					if (currentStringOrNumber != "") {
 						tokenArray.push(TokenAssigner(currentStringOrNumber));
 					}
-					lastType = TokenType.LETTER;
+					lastType = ValidTokens.LETTER;
 					currentStringOrNumber = currentToken.value;
 				} else {
 					currentStringOrNumber += currentToken.value;
@@ -158,13 +119,9 @@ function TokenizeInput(inputEquation) {
 }
 
 
-function TokenizeEquation(inputEquation) {
-	let tokenizedInput = TokenizeInput(inputEquation);
-
-	validateTokenizedInput(tokenizedInput);
-
+function TokeniseEquation(inputEquation) {
+	let tokenisedInput = TokeniseInput(inputEquation);
+	let parsedInput = parseTokens(tokenisedInput);
+	console.log (tokenisedInput);
 }
 
-function validateTokenizedInput(tokenizedInput) {
-	return true;
-}
