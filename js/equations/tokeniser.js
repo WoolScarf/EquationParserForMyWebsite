@@ -1,11 +1,15 @@
 
 
 function warner(...string){
-	console.warn(string);
+	console.warn(...string);
 }
 
 function logger(...string) {
-	console.log(string[0], '\n', string[1]);
+	if (string[1] == undefined) {
+		console.log(string[0]);
+	} else {
+		console.log(string[0], "\n", string[1]);
+	}
 }
 
 class Token {
@@ -141,5 +145,6 @@ function TokeniseEquation(inputEquation) {
 	let tokenisedInput = TokeniseInput(inputEquation);
 	let parsedInput = parseTokens(tokenisedInput);
 	logger(tokenisedInput);
+	return "done...";
 }
 
