@@ -5,10 +5,9 @@
 	<script src="js/equations/parser.js"></script>
 	<script src="js/equations/tokeniser.js"></script>
 	<script>
-		let x = "sin{x^2 + atan(15,2)}";
-		console.log(x);
-	  TokeniseEquation(x);
-	  debugger;
+		let x = "(4)}";
+		logger("Equation: ", x);
+	 	TokeniseEquation(x);
 	</script>
 
 </body>

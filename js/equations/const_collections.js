@@ -28,7 +28,7 @@ const ValidTokens = Object.freeze({
 	STRING: 'STRING',
 
 
-	NONE: 'NONE'
+	INVALID: 'INVALID'
 })
 
 
